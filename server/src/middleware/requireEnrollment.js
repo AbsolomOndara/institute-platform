@@ -1,0 +1,2 @@
+import { prisma } from "../config/prisma.js";
+export async function requireActiveEnrollment(req, res, next) { const courseId = Number(req.params.courseId); const enrollment = await prisma.enrollment.findUnique({ where: { studentId_courseId: { studentId: req.user.id, courseId } } }); if (!enrollment || !["ACTIVE","COMPLETED"].includes(enrollment.status)) return res.status(403).json({ message: "Course is locked until enrollment is approved" }); req.enrollment = enrollment; next(); }

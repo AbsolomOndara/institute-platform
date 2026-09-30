@@ -1,0 +1,13 @@
+import api from "./api";
+export const dashboard = () => api.get("/admin/dashboard");
+export const users = role => api.get("/admin/users", { params: { role } });
+export const updateUserStatus = (id, status) => api.patch(`/admin/users/${id}/status`, { status });
+export const createTutor = data => api.post("/admin/tutors", data);
+export const courses = () => api.get("/admin/courses");
+export const createCourse = data => api.post("/admin/courses", data);
+export const updateCourse = (id, data) => api.patch(`/admin/courses/${id}`, data);
+export const archiveCourse = id => api.delete(`/admin/courses/${id}`);
+export const assignTutor = (courseId, tutorId) => api.post(`/admin/courses/${courseId}/tutors/${tutorId}`);
+export const enrollments = () => api.get("/admin/enrollments");
+export const updateEnrollment = (id, status, reason) => api.patch(`/admin/enrollments/${id}`, { status, reason });
+export const messages = () => api.get("/admin/messages");

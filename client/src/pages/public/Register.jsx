@@ -1,0 +1,8 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../services/authService";
+export default function Register() {
+  const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" }); const [error, setError] = useState(""); const [busy, setBusy] = useState(false); const navigate = useNavigate();
+  async function submit(e) { e.preventDefault(); if (form.password !== form.confirm) return setError("The passwords do not match."); setBusy(true); setError(""); try { await register({ name: form.name, email: form.email, password: form.password }); window.location.href = "/student"; } catch (e) { setError(e.response?.data?.message || "Registration could not be completed."); } finally { setBusy(false); } }
+  return <main className="container narrow auth-page"><p className="eyebrow">Student portal</p><h1>Create your account</h1><p>Register to request admission to an ICSF course.</p><form onSubmit={submit}><label>Full name<input required value={form.name} onChange={e => setForm({...form, name:e.target.value})}/></label><label>Email address<input type="email" required value={form.email} onChange={e => setForm({...form, email:e.target.value})}/></label><label>Password<input type="password" minLength="8" required value={form.password} onChange={e => setForm({...form, password:e.target.value})}/></label><label>Confirm password<input type="password" required value={form.confirm} onChange={e => setForm({...form, confirm:e.target.value})}/></label>{error && <p className="error">{error}</p>}<button disabled={busy}>{busy ? "Creating account…" : "Create student account"}</button></form><p>Already registered? <Link className="inline-link" to="/login">Sign in</Link>.</p></main>;
+}

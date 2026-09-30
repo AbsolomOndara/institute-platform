@@ -1,0 +1,17 @@
+import { Router } from "express";
+import { listTutorCourses, createModule, updateModule, deleteModule, createLesson, updateLesson, deleteLesson, courseStudents } from "../controllers/tutorController.js";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { allowRoles } from "../middleware/allowRoles.js";
+import { requireCourseAssignment } from "../middleware/requireCourseAssignment.js";
+import { requirePasswordUpdated } from "../middleware/requirePasswordUpdated.js";
+const router = Router();
+router.use(requireAuth, allowRoles("TUTOR", "ADMIN"), requirePasswordUpdated);
+router.get("/courses", listTutorCourses);
+router.get("/courses/:courseId/students", requireCourseAssignment, courseStudents);
+router.post("/courses/:courseId/modules", requireCourseAssignment, createModule);
+router.patch("/courses/:courseId/modules/:moduleId", requireCourseAssignment, updateModule);
+router.delete("/courses/:courseId/modules/:moduleId", requireCourseAssignment, deleteModule);
+router.post("/courses/:courseId/modules/:moduleId/lessons", requireCourseAssignment, createLesson);
+router.patch("/courses/:courseId/lessons/:lessonId", requireCourseAssignment, updateLesson);
+router.delete("/courses/:courseId/lessons/:lessonId", requireCourseAssignment, deleteLesson);
+export default router;

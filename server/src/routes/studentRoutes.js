@@ -1,0 +1,13 @@
+import { Router } from "express";
+import { listMine } from "../controllers/enrollmentController.js";
+import { completeLesson, getLearningCourse } from "../controllers/lessonController.js";
+import { requireAuth } from "../middleware/requireAuth.js";
+import { allowRoles } from "../middleware/allowRoles.js";
+import { requireActiveEnrollment } from "../middleware/requireEnrollment.js";
+import { requirePasswordUpdated } from "../middleware/requirePasswordUpdated.js";
+const router = Router();
+router.use(requireAuth, allowRoles("STUDENT"), requirePasswordUpdated);
+router.get("/enrollments", listMine);
+router.get("/courses/:courseId", requireActiveEnrollment, getLearningCourse);
+router.post("/courses/:courseId/lessons/:lessonId/complete", requireActiveEnrollment, completeLesson);
+export default router;
