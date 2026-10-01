@@ -1,41 +1,44 @@
-# Institute of Cybersecurity and Forensics
+# ICSF Frontend
 
-JavaScript starter for the Institute of Cybersecurity & Forensics (ICSF), the training arm of the Kenya Cyber Security and Forensic Association.
+Standalone React frontend for the Institute of Cybersecurity & Forensics.
 
-The public pages use the institute's approved brochure content and navy, red-orange, white, and gold visual direction.
+## Run
 
-## Stack
+```powershell
+npm.cmd install
+npm.cmd run dev
+```
 
-- Client: React, Vite, React Router, Axios
-- Server: Node.js, Express, Prisma
-- Database: PostgreSQL
-- Authentication: database-backed sessions
+Open `http://localhost:5173`.
 
-## Roles
+## Build
 
-- Student: self-registers, requests enrollment, accesses approved courses.
-- Tutor: created by an admin, manages assigned course content.
-- Admin: manages accounts, courses, assignments, and enrollment approval.
+```powershell
+npm.cmd run build
+```
 
-## Start locally
+The production output is created in `dist`.
 
-1. Copy `server/.env.example` to `server/.env` and enter your PostgreSQL details.
-2. In `server`, run `npm install`, `npx prisma migrate dev --name initial`, `npm run db:seed`, and `npm run dev`.
-3. Copy `client/.env.example` to `client/.env`.
-4. In `client`, run `npm install` and `npm run dev`.
-5. Open `http://localhost:5173`.
+## Deploy on Vercel
 
-## Included functionality
+1. Push this folder to a GitHub repository.
+2. In Vercel, choose **Add New → Project** and import the repository.
+3. Select **Vite** as the framework preset.
+4. Use `npm run build` as the build command and `dist` as the output directory.
+5. Deploy. The included `vercel.json` keeps React routes working when a page is refreshed directly.
 
-- Institutional public pages, catalogue, course details and contact enquiries
-- Student self-registration and shared session-based login
-- Student, tutor and administrator portals
-- Admin-created tutor credentials with forced first-login password change
-- Course creation, publishing and tutor assignment
-- Student enrollment requests and admin approval/rejection/suspension
-- Server-enforced lesson locking until an enrollment is active
-- Tutor module and lesson management
-- Student lesson completion and course progress
-- Account suspension and live database role/status checks
+For a manual deployment with the Vercel CLI, run `npx vercel` in this folder and follow the prompts.
 
-See `OPERATIONS.md` for Windows setup, production requirements and external-service integration points.
+## Backend connection
+
+Public institutional content is built into the frontend from the approved ICSF brochure. Authentication, shared records, approvals and protected lessons use the service files under `src/services`.
+
+When the backend is developed, set:
+
+```env
+VITE_API_URL=https://your-api-domain.example/api
+```
+
+Add `VITE_API_URL` under **Project Settings → Environment Variables** in Vercel when the separate backend is available, then redeploy.
+
+No passwords, database connection strings or private credentials belong in this frontend project.

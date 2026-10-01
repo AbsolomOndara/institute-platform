@@ -1,2 +1,0 @@
-import { prisma } from "../config/prisma.js";
-export async function requireAuth(req, res, next) { try { if (!req.session.userId) return res.status(401).json({ message: "Authentication required" }); const user = await prisma.user.findUnique({ where: { id: req.session.userId }, select: { id: true, name: true, email: true, role: true, status: true, mustChangePassword: true } }); if (!user || user.status !== "ACTIVE") { req.session.destroy(() => {}); return res.status(401).json({ message: "Account unavailable" }); } req.user = user; next(); } catch (error) { next(error); } }

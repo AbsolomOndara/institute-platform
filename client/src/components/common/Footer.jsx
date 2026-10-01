@@ -1,2 +1,0 @@
-import { contact } from "../../data/siteContent";
-export default function Footer() { return <footer><div><strong>Institute of Cybersecurity &amp; Forensics</strong><p>A training arm of the Kenya Cyber Security and Forensic Association (KCSFA).</p></div><div><a href={`tel:${contact.phone.replaceAll(" ", "")}`}>{contact.phone}</a><a href={`mailto:${contact.email}`}>{contact.email}</a><span>{contact.address}</span></div></footer>; }
