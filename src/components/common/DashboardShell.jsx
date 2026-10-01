@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const links = {
-  STUDENT: [["/student", "Overview"], ["/student/courses", "My courses"]],
+  STUDENT: [["/student", "Overview"], ["/student/catalogue", "Course catalogue"], ["/student/courses", "My courses"]],
   TUTOR: [["/tutor", "Overview"], ["/tutor/courses", "Assigned courses"]],
   ADMIN: [["/admin", "Overview"], ["/admin/students", "Students"], ["/admin/tutors", "Tutors"], ["/admin/courses", "Courses"], ["/admin/enrollments", "Enrollments"]],
 };

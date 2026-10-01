@@ -1,2 +1,22 @@
-import { useState } from "react"; import { contact } from "../../data/siteContent";
-export default function Contact() { const [form,setForm]=useState({name:"",email:"",phone:"",subject:"",message:""}); function submit(e){e.preventDefault();const subject=encodeURIComponent(form.subject||"ICSF admissions enquiry");const body=encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone||"Not provided"}\n\n${form.message}`);window.location.href=`mailto:${contact.email}?subject=${subject}&body=${body}`;} return <main className="container page"><p className="eyebrow">Contact ICSF</p><h1>Speak with our admissions team.</h1><div className="contact-panel"><div><h2>Visit or contact us</h2><p>{contact.address}</p><p><a href={`tel:${contact.phone.replaceAll(" ", "")}`}>{contact.phone}</a><br/><a href={`mailto:${contact.email}`}>{contact.email}</a><br/>{contact.website}</p><div className="contact-hours"><strong>Admissions enquiries</strong><p>Contact the institute for current intake dates, course fees, schedules and entry guidance.</p></div></div><form onSubmit={submit}><label>Full name<input required value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/></label><label>Email address<input type="email" required value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/></label><label>Phone number<input value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/></label><label>Subject<input value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}/></label><label>Message<textarea rows="5" required value={form.message} onChange={e=>setForm({...form,message:e.target.value})}/></label><button type="submit">Prepare email</button><small>This opens your email application with the enquiry addressed to ICSF.</small></form></div></main>; }
+import { useState } from "react";
+import { contact } from "../../data/siteContent";
+import { sendContactMessage } from "../../services/contactService";
+
+const emptyForm = { name: "", email: "", phone: "", subject: "", message: "" };
+
+export default function Contact() {
+  const [form, setForm] = useState(emptyForm);
+  const [state, setState] = useState({ busy: false, message: "", error: "" });
+  async function submit(e) {
+    e.preventDefault();
+    setState({ busy: true, message: "", error: "" });
+    try {
+      const response = await sendContactMessage(form);
+      setForm(emptyForm);
+      setState({ busy: false, message: response.data.message, error: "" });
+    } catch (error) {
+      setState({ busy: false, message: "", error: error.response?.data?.message || "Your enquiry could not be sent. Please call or email ICSF directly." });
+    }
+  }
+  return <main className="container page"><p className="eyebrow">Contact ICSF</p><h1>Speak with our admissions team.</h1><div className="contact-panel"><div><h2>Visit or contact us</h2><p>{contact.address}</p><p><a href={`tel:${contact.phone.replaceAll(" ", "")}`}>{contact.phone}</a><br/><a href={`mailto:${contact.email}`}>{contact.email}</a><br/>{contact.website}</p><div className="contact-hours"><strong>Admissions enquiries</strong><p>Contact the institute for current intake dates, course fees, schedules and entry guidance.</p></div></div><form onSubmit={submit}><label>Full name<input required value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/></label><label>Email address<input type="email" required value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/></label><label>Phone number<input value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/></label><label>Subject<input value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})}/></label><label>Message<textarea rows="5" required value={form.message} onChange={e=>setForm({...form,message:e.target.value})}/></label>{state.message&&<p className="notice">{state.message}</p>}{state.error&&<p className="notice error">{state.error}</p>}<button type="submit" disabled={state.busy}>{state.busy?"Sending enquiry…":"Send enquiry"}</button></form></div></main>;
+}

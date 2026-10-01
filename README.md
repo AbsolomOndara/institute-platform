@@ -31,9 +31,9 @@ For a manual deployment with the Vercel CLI, run `npx vercel` in this folder and
 
 ## Backend connection
 
-Public institutional content is built into the frontend from the approved ICSF brochure. Authentication, shared records, approvals and protected lessons use the service files under `src/services`.
+Public institutional content is built into the frontend from the approved ICSF brochure. Authentication, shared records, approvals, contact enquiries and protected lessons use the service files under `src/services` and connect to the separately deployed ICSF backend.
 
-When the backend is developed, set:
+Set:
 
 ```env
 VITE_API_URL=https://your-api-domain.example/api
@@ -42,3 +42,5 @@ VITE_API_URL=https://your-api-domain.example/api
 Add `VITE_API_URL` under **Project Settings → Environment Variables** in Vercel when the separate backend is available, then redeploy.
 
 No passwords, database connection strings or private credentials belong in this frontend project.
+
+The backend must permit the exact Vercel frontend origin through its `CLIENT_URL` setting. Axios is already configured with `withCredentials: true`, so the secure session cookie is included with API requests.

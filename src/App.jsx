@@ -10,6 +10,7 @@ import Login from "./pages/public/Login";
 import Register from "./pages/public/Register";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import MyCourses from "./pages/student/MyCourses";
+import CourseCatalogue from "./pages/student/CourseCatalogue";
 import LearnCourse from "./pages/student/LearnCourse";
 import TutorDashboard from "./pages/tutor/TutorDashboard";
 import TutorCourses from "./pages/tutor/TutorCourses";
@@ -37,7 +38,7 @@ export default function App() {
       <Route path="/privacy" element={<Privacy />} /><Route path="/terms" element={<Terms />} />
     </Route>
     <Route element={<RoleRoute roles={["STUDENT"]} />}>
-      <Route path="/student" element={<StudentDashboard />} /><Route path="/student/courses" element={<MyCourses />} />
+      <Route path="/student" element={<StudentDashboard />} /><Route path="/student/catalogue" element={<CourseCatalogue />} /><Route path="/student/courses" element={<MyCourses />} />
       <Route path="/student/courses/:courseId" element={<LearnCourse />} />
     </Route>
     <Route element={<RoleRoute roles={["TUTOR"]} />}>
