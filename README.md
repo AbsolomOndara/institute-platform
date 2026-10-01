@@ -36,11 +36,11 @@ Public institutional content is built into the frontend from the approved ICSF b
 Set:
 
 ```env
-VITE_API_URL=https://your-api-domain.example/api
+VITE_API_URL=/api
 ```
 
 Add `VITE_API_URL` under **Project Settings → Environment Variables** in Vercel when the separate backend is available, then redeploy.
 
 No passwords, database connection strings or private credentials belong in this frontend project.
 
-The backend must permit the exact Vercel frontend origin through its `CLIENT_URL` setting. Axios is already configured with `withCredentials: true`, so the secure session cookie is included with API requests.
+The included Vercel rewrite proxies `/api` to the ICSF Render backend. Using `/api` keeps the session cookie first-party so student, tutor and administrator sessions remain signed in when pages are refreshed. The backend must still permit the exact Vercel frontend origin through `CLIENT_URL`.

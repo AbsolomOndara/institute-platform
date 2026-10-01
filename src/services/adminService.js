@@ -2,6 +2,8 @@ import api from "./api";
 export const dashboard = () => api.get("/admin/dashboard");
 export const users = role => api.get("/admin/users", { params: { role } });
 export const updateUserStatus = (id, status) => api.patch(`/admin/users/${id}/status`, { status });
+export const resetUserPassword = id => api.post(`/admin/users/${id}/reset-password`);
+export const deleteTutor = id => api.delete(`/admin/tutors/${id}`);
 export const createTutor = data => api.post("/admin/tutors", data);
 export const courses = () => api.get("/admin/courses");
 export const createCourse = data => api.post("/admin/courses", data);

@@ -26,6 +26,8 @@ import Admissions from "./pages/public/Admissions";
 import FAQ from "./pages/public/FAQ";
 import Privacy from "./pages/public/Privacy";
 import Terms from "./pages/public/Terms";
+import ForgotPassword from "./pages/public/ForgotPassword";
+import ResetPassword from "./pages/public/ResetPassword";
 
 export default function App() {
   return <Routes>
@@ -36,6 +38,7 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/admissions" element={<Admissions />} /><Route path="/faq" element={<FAQ />} />
       <Route path="/privacy" element={<Privacy />} /><Route path="/terms" element={<Terms />} />
+      <Route path="/forgot-password" element={<ForgotPassword/>}/><Route path="/reset-password" element={<ResetPassword/>}/>
     </Route>
     <Route element={<RoleRoute roles={["STUDENT"]} />}>
       <Route path="/student" element={<StudentDashboard />} /><Route path="/student/catalogue" element={<CourseCatalogue />} /><Route path="/student/courses" element={<MyCourses />} />
@@ -48,6 +51,7 @@ export default function App() {
     <Route element={<RoleRoute roles={["ADMIN"]} />}>
       <Route path="/admin" element={<AdminDashboard />} /><Route path="/admin/students" element={<ManageStudents />} />
       <Route path="/admin/tutors" element={<ManageTutors />} /><Route path="/admin/courses" element={<ManageCourses />} />
+      <Route path="/admin/courses/:courseId/manage" element={<ManageCourse />} />
       <Route path="/admin/enrollments" element={<ManageEnrollments />} />
     </Route>
     <Route element={<RoleRoute roles={["STUDENT", "TUTOR", "ADMIN"]} />}><Route path="/account" element={<AccountSettings />} /></Route>

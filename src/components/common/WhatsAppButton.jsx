@@ -1,0 +1,1 @@
+export default function WhatsAppButton(){return <a className="whatsapp-float" href="https://wa.me/254798569215?text=Hello%20ICSF%2C%20I%20would%20like%20information%20about%20your%20courses." target="_blank" rel="noreferrer" aria-label="Chat with ICSF on WhatsApp"><span>WhatsApp</span></a>}
