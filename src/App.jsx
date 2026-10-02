@@ -28,6 +28,7 @@ import Privacy from "./pages/public/Privacy";
 import Terms from "./pages/public/Terms";
 import ForgotPassword from "./pages/public/ForgotPassword";
 import ResetPassword from "./pages/public/ResetPassword";
+import Library from "./pages/Library";
 
 export default function App() {
   return <Routes>
@@ -53,8 +54,10 @@ export default function App() {
       <Route path="/admin/tutors" element={<ManageTutors />} /><Route path="/admin/courses" element={<ManageCourses />} />
       <Route path="/admin/courses/:courseId/manage" element={<ManageCourse />} />
       <Route path="/admin/enrollments" element={<ManageEnrollments />} />
+      <Route path="/admin/messages" element={<AdminDashboard />} />
     </Route>
     <Route element={<RoleRoute roles={["STUDENT", "TUTOR", "ADMIN"]} />}><Route path="/account" element={<AccountSettings />} /></Route>
+    <Route element={<RoleRoute roles={["STUDENT", "TUTOR", "ADMIN"]} />}><Route path="/library" element={<Library />} /></Route>
     <Route path="/dashboard" element={<Navigate to="/login" replace />} /><Route path="*" element={<NotFound />} />
   </Routes>;
 }

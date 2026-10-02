@@ -14,12 +14,12 @@ export const audiences = [
   { title: "Law enforcement and legal practitioners", text: "Professionals who need a sound understanding of digital evidence, cybercrime procedures and forensic protocols." },
   { title: "Educators and trainers", text: "Teachers and facilitators incorporating cybersecurity and digital forensics into learning programs." },
 ];
-export const contact = { phone: "+254 798 569 215", email: "info@icsf.co.ke", website: "www.icsf.co.ke", address: "RNG Plaza, Room 32, 5th Floor, Ronald Ngala Street, Nairobi CBD" };
+export const contact = { phone: "+254 798 569 215", email: "info@icsf.co.ke", website: "www.icsf.co.ke", address: "Solar House, 6th Floor, Room 605, Aga Khan Walk, opposite Co-operative Bank and the Bomb Blast Memorial, Nairobi Central Business District, Nairobi, Kenya" };
 export const faqs = [
   ["How are courses delivered?", "ICSF uses a flexible blend of online and physical classes, guided by experienced instructors and supported by certification preparation."],
   ["Can I enroll online?", "You can create a student account and submit a course-enrollment request online. Access remains pending until the institute verifies and approves the request."],
   ["When can I access lessons?", "Lessons become available after an administrator changes the enrollment from pending to active."],
   ["Who can join the programs?", "Programs serve beginners, working ICT professionals, university students and graduates, legal and law-enforcement practitioners, educators and trainers."],
-  ["Where is the institute located?", "ICSF is located at RNG Plaza, Room 32, 5th Floor, Ronald Ngala Street, Nairobi CBD."],
+  ["Where is the institute located?", "ICSF is located at Solar House, 6th Floor, Room 605, Aga Khan Walk, opposite Co-operative Bank and the Bomb Blast Memorial, Nairobi Central Business District, Nairobi, Kenya."],
   ["How can I confirm course dates and fees?", "Contact the admissions team by telephone or email for the current intake dates, schedules, fees and entry information."],
 ];

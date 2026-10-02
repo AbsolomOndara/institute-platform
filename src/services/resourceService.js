@@ -1,0 +1,1 @@
+import api from"./api";export const books=()=>api.get("/library");export const createBook=data=>api.post("/library",data);export const deleteBook=id=>api.delete(`/library/${id}`);export const uploadFile=file=>{const data=new FormData();data.append("file",file);return api.post("/uploads",data,{headers:{"Content-Type":"multipart/form-data"}})};

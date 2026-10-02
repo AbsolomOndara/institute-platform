@@ -1,0 +1,1 @@
+import{useState}from"react";export default function PasswordInput(props){const[show,setShow]=useState(false);return <span className="password-wrap"><input {...props} type={show?"text":"password"}/><button type="button" className="password-toggle" onClick={()=>setShow(!show)} aria-label={show?"Hide password":"Show password"}>{show?"Hide":"Show"}</button></span>}

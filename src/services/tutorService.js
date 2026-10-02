@@ -6,3 +6,7 @@ export const deleteModule = (courseId, moduleId) => api.delete(`/tutor/courses/$
 export const addLesson = (courseId, moduleId, data) => api.post(`/tutor/courses/${courseId}/modules/${moduleId}/lessons`, data);
 export const updateLesson = (courseId, lessonId, data) => api.patch(`/tutor/courses/${courseId}/lessons/${lessonId}`, data);
 export const deleteLesson = (courseId, lessonId) => api.delete(`/tutor/courses/${courseId}/lessons/${lessonId}`);
+export const addAssessment=(courseId,moduleId,data)=>api.post(`/tutor/courses/${courseId}/modules/${moduleId}/assessments`,data);
+export const deleteAssessment=(courseId,id)=>api.delete(`/tutor/courses/${courseId}/assessments/${id}`);
+export const assessmentSubmissions=(courseId,id)=>api.get(`/tutor/courses/${courseId}/assessments/${id}/submissions`);
+export const gradeSubmission=(courseId,id,data)=>api.patch(`/tutor/courses/${courseId}/submissions/${id}`,data);
